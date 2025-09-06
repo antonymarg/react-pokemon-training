@@ -1,6 +1,6 @@
 import type { CaughtPokemon } from '../../lib/types'
 import { PokemonMove } from './PokemonMove'
-import { Button } from '../atoms/Button'
+import { Button } from '../ui/Button'
 import { LevelBadge } from './LevelBadge'
 
 interface PokemonCardProps {

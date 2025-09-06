@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CaughtPokemon } from '../../lib/types'
-import { Button } from '../atoms/Button'
+import { Button } from '../ui/Button'
 import { AddPokemonModal } from '../pokemon/AddPokemonModal'
 
 interface FooterProps {

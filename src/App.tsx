@@ -2,7 +2,7 @@ import { Header } from './components/layout/Header'
 import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
 import pokeball from './assets/svgs/pokeball.svg'
 import { Footer } from './components/layout/Footer'
-import { CardGrid } from './components/layout/CardGrid'
+import { PokemonGrid } from './components/pokemon/PokemonGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
 import { pokemonList } from './lib/pokemonList'
 import { getPokemonUID } from './lib/utils'
@@ -25,7 +25,7 @@ function App() {
         />
         <main className="flex-1 p-4 sm:p-6">
           {pokemonList.length > 0 ? (
-            <CardGrid>
+            <PokemonGrid>
               {caughtPokemon.map((pokemon) => (
                 <PokemonCard
                   key={pokemon.pokedexId}
@@ -34,7 +34,7 @@ function App() {
                   levelUpPokemon={levelUpPokemon}
                 />
               ))}
-            </CardGrid>
+            </PokemonGrid>
           ) : (
             <NoPokemonMessage />
           )}
