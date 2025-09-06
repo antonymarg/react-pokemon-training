@@ -16,7 +16,7 @@ export function Footer({ addPokemon }: FooterProps) {
 
   return (
     <>
-      <footer className="sticky bottom-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+      <footer className="sticky bottom-0 bg-white border-t border-gray-200 p-4 shadow-lg z-50">
         <div className="mx-auto flex justify-end">
           <Button
             onClick={handleOpenModal}
