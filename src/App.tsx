@@ -1,6 +1,6 @@
+import pokeball from './assets/svgs/pokeball.svg'
 import { Header } from './components/layout/Header'
 import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
-import pokeball from './assets/svgs/pokeball.svg'
 import { Footer } from './components/layout/Footer'
 import { PokemonGrid } from './components/pokemon/PokemonGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
