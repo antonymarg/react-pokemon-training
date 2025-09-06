@@ -4,16 +4,21 @@ import pokeball from './assets/svgs/pokeball.svg'
 import { Footer } from './components/layout/Footer'
 import { PokemonGrid } from './components/pokemon/PokemonGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
-import { pokemonList } from './lib/pokemonList'
-import { getPokemonUID } from './lib/utils'
 import type { CaughtPokemon } from './lib/types'
+import { useState } from 'react'
 
 function App() {
-  const addPokemon = () => {}
-  const removePokemon = () => {}
-  const levelUpPokemon = () => {}
+  const [pokemonList, setPokemonList] = useState<CaughtPokemon[]>([])
 
-  const caughtPokemon:CaughtPokemon[] = pokemonList.map((pokemon) => ({ ...pokemon, level: 1, uid: getPokemonUID(pokemon) }))
+  const addPokemon = (pokemon: CaughtPokemon) => {
+    setPokemonList([...pokemonList, pokemon])
+  }
+  const removePokemon = (pokemon: CaughtPokemon) => {
+    setPokemonList(pokemonList.filter((p) => p.uid !== pokemon.uid))
+  }
+  const levelUpPokemon = (pokemon: CaughtPokemon) => {
+    setPokemonList(pokemonList.map((p) => p.uid === pokemon.uid ? { ...p, level: p.level + 1 } : p))
+  }
 
   return (
     <>
@@ -26,7 +31,7 @@ function App() {
         <main className="flex-1 p-4 sm:p-6">
           {pokemonList.length > 0 ? (
             <PokemonGrid>
-              {caughtPokemon.map((pokemon) => (
+              {pokemonList.map((pokemon) => (
                 <PokemonCard
                   key={pokemon.pokedexId}
                   pokemon={pokemon}
