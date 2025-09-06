@@ -1,6 +1,7 @@
+import pokeball from './assets/svgs/pokeball.svg'
 import { Header } from './components/layout/Header'
 import { pokemonList } from './lib/pokemonList'
-import pokeball from './assets/svgs/pokeball.svg'
+import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
 import { CardGrid } from './components/layout/CardGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
 
@@ -13,11 +14,15 @@ function App() {
         bgColor="red"
       />
       <main className="flex-1 p-4 sm:p-6">
-        <CardGrid>
-          <PokemonCard pokemon={pokemonList[0]} />
-          <PokemonCard pokemon={pokemonList[1]} />
-          <PokemonCard pokemon={pokemonList[2]} />
-        </CardGrid>
+        {pokemonList.length > 0 ? (
+          <CardGrid>
+            {pokemonList.map((pokemon) => (
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </CardGrid>
+        ) : (
+          <NoPokemonMessage />
+        )}
       </main>
     </div>
   )
