@@ -4,6 +4,7 @@ import { pokemonList } from './lib/pokemonList'
 import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
 import { CardGrid } from './components/layout/CardGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
+import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
 
 function App() {
   return (
