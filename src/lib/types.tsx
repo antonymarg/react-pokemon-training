@@ -19,10 +19,16 @@ type PokemonTypes =
   | 'fairy'
 
 interface Pokemon {
-  id: string
+  pokedexId: string
   name: string
   avatar: string
   moves: PokemonMoves[]
+  availableMoves: PokemonMoves[]
+}
+
+interface CaughtPokemon extends Pokemon {
+  level: number
+  uid: string
 }
 
 interface PokemonMoves {
@@ -30,4 +36,4 @@ interface PokemonMoves {
   type: PokemonTypes
 }
 
-export type { Pokemon, PokemonMoves }
+export type { Pokemon, PokemonMoves, CaughtPokemon }

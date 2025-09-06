@@ -26,12 +26,13 @@ export function PokemonMove({ move }: { move: PokemonMoves }) {
   return (
     <div
       key={move.name}
-      className="w-full px-3 py-2 text-sm font-bold rounded border-2 shadow-sm hover:shadow-md text-center"
+      className="w-full px-3 py-2.5 text-sm font-bold rounded-lg border-2 shadow-md hover:shadow-lg text-center transform transition-all duration-200 hover:-translate-y-0.5 cursor-default"
       style={{
         backgroundColor: colors.bg,
         borderColor: colors.border,
         color: colors.text,
         filter: 'brightness(1.05)',
+        background: `linear-gradient(135deg, ${colors.bg}, ${colors.bg}dd)`,
       }}
     >
       {move.name}
