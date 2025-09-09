@@ -9,14 +9,32 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'dis
   size?: ButtonSize
   disabled?: boolean
   loading?: boolean
+  isDarkMode?: boolean
 }
 
-const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 text-white border border-transparent shadow-lg hover:shadow-xl',
-  secondary: 'bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 active:from-gray-300 active:to-gray-400 text-gray-900 border border-transparent shadow-md hover:shadow-lg',
-  outline: 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-50 hover:to-blue-50 active:from-gray-100 active:to-blue-100 text-gray-700 border-2 border-gray-300 hover:border-blue-300 shadow-sm hover:shadow-md',
-  ghost: 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-100 hover:to-gray-200 active:from-gray-200 active:to-gray-300 text-gray-700 border border-transparent hover:shadow-md',
-  danger: 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 active:from-red-800 active:to-red-900 text-white border border-transparent shadow-lg hover:shadow-xl',
+const getVariantStyles = (variant: ButtonVariant, isDarkMode: boolean): string => {
+  const styles = {
+    primary: isDarkMode
+      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white border border-transparent shadow-lg hover:shadow-xl'
+      : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 text-white border border-transparent shadow-lg hover:shadow-xl',
+
+    secondary: isDarkMode
+      ? 'bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-gray-100 border border-transparent shadow-md hover:shadow-lg'
+      : 'bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 active:from-gray-300 active:to-gray-400 text-gray-900 border border-transparent shadow-md hover:shadow-lg',
+
+    outline: isDarkMode
+      ? 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-800 hover:to-blue-900 text-gray-300 border-2 border-gray-600 hover:border-blue-500 shadow-sm hover:shadow-md'
+      : 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-50 hover:to-blue-50 active:from-gray-100 active:to-blue-100 text-gray-700 border-2 border-gray-300 hover:border-blue-300 shadow-sm hover:shadow-md',
+
+    ghost: isDarkMode
+      ? 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-800 hover:to-gray-700 text-gray-300 border border-transparent hover:shadow-md'
+      : 'bg-gradient-to-r from-transparent to-transparent hover:from-gray-100 hover:to-gray-200 active:from-gray-200 active:to-gray-300 text-gray-700 border border-transparent hover:shadow-md',
+
+    danger: isDarkMode
+      ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border border-transparent shadow-lg hover:shadow-xl'
+      : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 active:from-red-800 active:to-red-900 text-white border border-transparent shadow-lg hover:shadow-xl',
+  }
+  return styles[variant]
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -32,11 +50,16 @@ export function Button({
   disabled = false,
   loading = false,
   className = '',
+  isDarkMode = false,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:hover:transform-none'
+  const baseStyles = `inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:hover:transform-none ${
+    isDarkMode
+      ? 'focus:ring-blue-400 focus:ring-offset-gray-800'
+      : 'focus:ring-blue-500 focus:ring-offset-white'
+  }`
 
-  const variantClasses = variantStyles[variant]
+  const variantClasses = getVariantStyles(variant, isDarkMode)
   const sizeClasses = sizeStyles[size]
 
   const isDisabled = disabled || loading

@@ -7,11 +7,16 @@ interface PokemonCardProps {
   pokemon: CaughtPokemon;
   removePokemon: (pokemon: CaughtPokemon) => void;
   levelUpPokemon: (pokemon: CaughtPokemon) => void;
+  isDarkMode: boolean;
 }
 
-export function PokemonCard({ pokemon, removePokemon, levelUpPokemon }: PokemonCardProps) {
+export function PokemonCard({ pokemon, removePokemon, levelUpPokemon, isDarkMode }: PokemonCardProps) {
   return (
-    <div className="bg-gradient-to-br from-white via-blue-50 to-indigo-100 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative border border-gray-200/50">
+    <div className={`rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative border ${
+      isDarkMode
+        ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 border-gray-600/50'
+        : 'bg-gradient-to-br from-white via-blue-50 to-indigo-100 border-gray-200/50'
+    }`}>
       {pokemon.level && <LevelBadge level={pokemon.level} />}
       <div className="aspect-square w-full overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
@@ -25,13 +30,19 @@ export function PokemonCard({ pokemon, removePokemon, levelUpPokemon }: PokemonC
       </div>
       <div className="p-6">
         <div className="mb-4">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-1">
+          <h3 className={`text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-1 ${
+            isDarkMode
+              ? 'from-gray-100 to-gray-300'
+              : 'from-gray-800 to-gray-600'
+          }`}>
             {pokemon.name}
           </h3>
           <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full w-16" />
         </div>
         <div className="mb-6">
-          <h4 className="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wider">Moves</h4>
+          <h4 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+          }`}>Moves</h4>
           <div className="grid grid-cols-2 gap-3">
             {pokemon.moves.map((move) => {
               return <PokemonMove key={move.name} move={move} />
@@ -44,6 +55,7 @@ export function PokemonCard({ pokemon, removePokemon, levelUpPokemon }: PokemonC
             variant="danger"
             size="md"
             className="flex-1"
+            isDarkMode={isDarkMode}
           >
             Remove
           </Button>
@@ -52,6 +64,7 @@ export function PokemonCard({ pokemon, removePokemon, levelUpPokemon }: PokemonC
             variant="primary"
             size="md"
             className="flex-1"
+            isDarkMode={isDarkMode}
           >
             Level up
           </Button>

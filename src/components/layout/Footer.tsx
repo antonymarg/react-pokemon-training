@@ -7,9 +7,10 @@ import type { PokemonListItem } from '../../api/pokemon/types'
 interface FooterProps {
   addPokemon: (pokemon: CaughtPokemon, moveIds: PokemonMoves['id'][]) => Promise<void>
   availablePokemon: PokemonListItem[];
+  isDarkMode: boolean;
 }
 
-export function Footer({ addPokemon, availablePokemon }: FooterProps) {
+export function Footer({ addPokemon, availablePokemon, isDarkMode }: FooterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -18,12 +19,17 @@ export function Footer({ addPokemon, availablePokemon }: FooterProps) {
 
   return (
     <>
-      <footer className="sticky bottom-0 bg-white border-t border-gray-200 p-4 shadow-lg z-50">
+      <footer className={`sticky bottom-0 p-4 shadow-lg z-50 transition-colors duration-300 ${
+        isDarkMode
+          ? 'bg-gray-800 border-gray-700'
+          : 'bg-white border-gray-200'
+      } border-t`}>
         <div className="mx-auto flex justify-end">
           <Button
             onClick={handleOpenModal}
             size="lg"
             variant="primary"
+            isDarkMode={isDarkMode}
           >
             Catch Pokemon
           </Button>

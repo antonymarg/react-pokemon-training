@@ -1,9 +1,10 @@
 interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg'
   className?: string
+  isDarkMode?: boolean
 }
 
-export function Spinner({ size = 'md', className = '' }: SpinnerProps) {
+export function Spinner({ size = 'md', className = '', isDarkMode = false }: SpinnerProps) {
   const sizeClasses = {
     sm: 'w-4 h-4',
     md: 'w-8 h-8',
@@ -11,7 +12,11 @@ export function Spinner({ size = 'md', className = '' }: SpinnerProps) {
   }
 
   return (
-    <div className={`animate-spin rounded-full border-2 border-gray-300 border-t-red-500 ${sizeClasses[size]} ${className}`}>
+    <div className={`animate-spin rounded-full border-2 ${
+      isDarkMode
+        ? 'border-gray-600 border-t-red-400'
+        : 'border-gray-300 border-t-red-500'
+    } ${sizeClasses[size]} ${className}`}>
       <span className="sr-only">Loading...</span>
     </div>
   )
