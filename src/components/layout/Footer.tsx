@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import type { CaughtPokemon } from '../../lib/types'
+import { type CaughtPokemon, type PokemonMoves } from '../../lib/types'
 import { Button } from '../ui/Button'
 import { AddPokemonModal } from '../pokemon/AddPokemonModal'
+import type { PokemonListItem } from '../../api/pokemon/types'
 
 interface FooterProps {
-  addPokemon: (pokemon: CaughtPokemon) => void;
+  addPokemon: (pokemon: CaughtPokemon, moveIds: PokemonMoves['id'][]) => Promise<void>
+  availablePokemon: PokemonListItem[];
 }
 
-export function Footer({ addPokemon }: FooterProps) {
+export function Footer({ addPokemon, availablePokemon }: FooterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -31,6 +33,7 @@ export function Footer({ addPokemon }: FooterProps) {
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         onAddPokemon={addPokemon}
+        availablePokemon={availablePokemon}
       />
     </>
   )

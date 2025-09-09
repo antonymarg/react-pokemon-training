@@ -4,20 +4,16 @@ import { Footer } from './components/layout/Footer'
 import { PokemonGrid } from './components/pokemon/PokemonGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
 import pokeball from './assets/svgs/pokeball.svg'
-import type { CaughtPokemon } from './lib/types'
-import { useLocalStorage } from './hooks/useLocalStorage'
+import { usePokemon } from './hooks/usePokemon'
+import { Spinner } from './components/ui/Spinner'
 
 function App() {
-  const [pokemonList, setPokemonList] = useLocalStorage<CaughtPokemon[]>('caughtPokemon', [])
+  const { availablePokemon, caughtPokemon, addPokemon, removePokemon, levelUpPokemon, isLoading } = usePokemon()
 
-  const addPokemon = (pokemon: CaughtPokemon) => {
-    setPokemonList([...pokemonList, pokemon])
-  }
-  const removePokemon = (pokemon: CaughtPokemon) => {
-    setPokemonList(pokemonList.filter((p) => p.uid !== pokemon.uid))
-  }
-  const levelUpPokemon = (pokemon: CaughtPokemon) => {
-    setPokemonList(pokemonList.map((p) => p.uid === pokemon.uid ? { ...p, level: p.level + 1 } : p))
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-full">
+      <Spinner />
+    </div>
   }
 
   return (
@@ -29,11 +25,11 @@ function App() {
           bgColor="red"
         />
         <main className="flex-1 p-4 sm:p-6">
-          {pokemonList.length > 0 ? (
+          {caughtPokemon.length > 0 ? (
             <PokemonGrid>
-              {pokemonList.map((pokemon) => (
+              {caughtPokemon.map((pokemon) => (
                 <PokemonCard
-                  key={pokemon.pokedexId}
+                  key={pokemon.uid}
                   pokemon={pokemon}
                   removePokemon={removePokemon}
                   levelUpPokemon={levelUpPokemon}
@@ -44,7 +40,7 @@ function App() {
             <NoPokemonMessage />
           )}
         </main>
-        <Footer addPokemon={addPokemon} />
+        <Footer addPokemon={addPokemon} availablePokemon={availablePokemon} />
       </div>
       <div />
     </>

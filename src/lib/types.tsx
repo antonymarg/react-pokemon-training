@@ -1,4 +1,4 @@
-type PokemonTypes =
+export type PokemonTypes =
   | 'normal'
   | 'fire'
   | 'water'
@@ -32,6 +32,7 @@ interface CaughtPokemon extends Pokemon {
 }
 
 interface PokemonMoves {
+  id: string
   name: string
   type: PokemonTypes
 }
