@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Header } from './components/layout/Header'
 import { NoPokemonMessage } from './components/layout/NoPokemonMessage'
 import { Footer } from './components/layout/Footer'
@@ -6,39 +5,10 @@ import { PokemonGrid } from './components/pokemon/PokemonGrid'
 import { PokemonCard } from './components/pokemon/PokemonCard'
 import pokeball from './assets/svgs/pokeball.svg'
 import type { CaughtPokemon } from './lib/types'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 function App() {
-  const [pokemonList, setPokemonList] = useState<CaughtPokemon[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    try {
-      const savedPokemon = localStorage.getItem('caughtPokemon')
-      if (savedPokemon) {
-        const parsedPokemon = JSON.parse(savedPokemon) as CaughtPokemon[]
-
-        if (Array.isArray(parsedPokemon)) {
-          setPokemonList(parsedPokemon)
-        }
-      }
-    } catch (error) {
-      console.error('Error loading Pokemon from localStorage:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (isLoading) {
-      return
-    }
-
-    try {
-      localStorage.setItem('caughtPokemon', JSON.stringify(pokemonList))
-    } catch (error) {
-      console.error('Error saving Pokemon to localStorage:', error)
-    }
-  }, [pokemonList, isLoading])
+  const [pokemonList, setPokemonList] = useLocalStorage<CaughtPokemon[]>('caughtPokemon', [])
 
   const addPokemon = (pokemon: CaughtPokemon) => {
     setPokemonList([...pokemonList, pokemon])
