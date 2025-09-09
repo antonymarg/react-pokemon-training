@@ -3,15 +3,16 @@ import { type CaughtPokemon, type PokemonMoves } from '../../lib/types'
 import { Button } from '../ui/Button'
 import { AddPokemonModal } from '../pokemon/AddPokemonModal'
 import type { PokemonListItem } from '../../api/pokemon/types'
+import { useTheme } from '../../contexts/ThemeContext'
 
 interface FooterProps {
   addPokemon: (pokemon: CaughtPokemon, moveIds: PokemonMoves['id'][]) => Promise<void>
   availablePokemon: PokemonListItem[];
-  isDarkMode: boolean;
 }
 
-export function Footer({ addPokemon, availablePokemon, isDarkMode }: FooterProps) {
+export function Footer({ addPokemon, availablePokemon }: FooterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { isDarkMode } = useTheme()
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -29,7 +30,6 @@ export function Footer({ addPokemon, availablePokemon, isDarkMode }: FooterProps
             onClick={handleOpenModal}
             size="lg"
             variant="primary"
-            isDarkMode={isDarkMode}
           >
             Catch Pokemon
           </Button>

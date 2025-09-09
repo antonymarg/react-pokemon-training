@@ -2,15 +2,16 @@ import type { CaughtPokemon } from '../../lib/types'
 import { PokemonMove } from './PokemonMove'
 import { Button } from '../ui/Button'
 import { LevelBadge } from './LevelBadge'
+import { useTheme } from '../../contexts/ThemeContext'
 
 interface PokemonCardProps {
   pokemon: CaughtPokemon;
   removePokemon: (pokemon: CaughtPokemon) => void;
   levelUpPokemon: (pokemon: CaughtPokemon) => void;
-  isDarkMode: boolean;
 }
 
-export function PokemonCard({ pokemon, removePokemon, levelUpPokemon, isDarkMode }: PokemonCardProps) {
+export function PokemonCard({ pokemon, removePokemon, levelUpPokemon }: PokemonCardProps) {
+  const { isDarkMode } = useTheme()
   return (
     <div className={`rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative border ${
       isDarkMode
@@ -55,7 +56,6 @@ export function PokemonCard({ pokemon, removePokemon, levelUpPokemon, isDarkMode
             variant="danger"
             size="md"
             className="flex-1"
-            isDarkMode={isDarkMode}
           >
             Remove
           </Button>
@@ -64,7 +64,6 @@ export function PokemonCard({ pokemon, removePokemon, levelUpPokemon, isDarkMode
             variant="primary"
             size="md"
             className="flex-1"
-            isDarkMode={isDarkMode}
           >
             Level up
           </Button>

@@ -1,7 +1,4 @@
-interface DarkModeToggleProps {
-  isDarkMode: boolean
-  onToggle: () => void
-}
+import { useTheme } from '../../contexts/ThemeContext'
 
 const SunIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 20 20" fill="currentColor">
@@ -15,10 +12,11 @@ const MoonIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-export function DarkModeToggle({ isDarkMode, onToggle }: DarkModeToggleProps) {
+export function DarkModeToggle() {
+  const {isDarkMode, toggleDarkMode}= useTheme()
   return (
     <button
-      onClick={onToggle}
+      onClick={toggleDarkMode}
       className="relative inline-flex h-8 w-14 items-center rounded-full bg-white/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
       role="switch"
       aria-checked={isDarkMode}

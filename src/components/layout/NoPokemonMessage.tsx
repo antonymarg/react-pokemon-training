@@ -1,8 +1,7 @@
-interface NoPokemonMessageProps {
-  isDarkMode: boolean;
-}
+import { useTheme } from '../../contexts/ThemeContext'
 
-export function NoPokemonMessage({ isDarkMode }: NoPokemonMessageProps) {
+export function NoPokemonMessage() {
+  const { isDarkMode } = useTheme()
   return (
     <div className="flex flex-1 items-center justify-center h-full w-full">
       <div className="text-center">

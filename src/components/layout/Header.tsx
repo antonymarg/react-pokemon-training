@@ -4,8 +4,6 @@ interface HeaderProps {
   title: string
   icon: string
   bgColor: 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink' | 'orange' | 'teal' | 'cyan' | 'gray'
-  isDarkMode: boolean
-  toggleDarkMode: () => void
 }
 
 const colorMap = {
@@ -22,7 +20,7 @@ const colorMap = {
   gray: 'bg-gray-500',
 }
 
-export function Header({ title, icon, bgColor, isDarkMode, toggleDarkMode }: HeaderProps) {
+export function Header({ title, icon, bgColor }: HeaderProps) {
   return (
     <header className={`sticky top-0 z-10 flex items-center justify-between ${colorMap[bgColor]} p-4 backdrop-blur-sm sm:p-6 shadow-sm`}>
       <div className="flex items-center gap-3">
@@ -31,7 +29,7 @@ export function Header({ title, icon, bgColor, isDarkMode, toggleDarkMode }: Hea
           {title}
         </h1>
       </div>
-      <DarkModeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
+      <DarkModeToggle />
     </header>
   )
 }
