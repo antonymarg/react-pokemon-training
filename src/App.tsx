@@ -6,16 +6,15 @@ import { PokemonCard } from './components/pokemon/PokemonCard'
 import pokeball from './assets/svgs/pokeball.svg'
 import { usePokemon } from './hooks/usePokemon'
 import { Spinner } from './components/ui/Spinner'
-import { ThemeProvider, useTheme } from './contexts/ThemeContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 
 function App() {
   const { availablePokemon, caughtPokemon, addPokemon, removePokemon, levelUpPokemon, isLoading } = usePokemon()
-  const { isDarkMode } = useTheme()
 
   if (isLoading) {
     return (
       <ThemeProvider>
-        <div className={`flex justify-center items-center h-full transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <div className="flex justify-center items-center h-full transition-colors duration-300 bg-gray-50 dark:bg-gray-900">
           <Spinner />
         </div>
       </ThemeProvider>
@@ -24,7 +23,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className={`flex min-h-screen w-full flex-col transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <div className="flex min-h-screen w-full flex-col transition-colors duration-300 bg-gray-50 dark:bg-gray-900">
         <Header
           title="Pokemon Training"
           icon={pokeball}

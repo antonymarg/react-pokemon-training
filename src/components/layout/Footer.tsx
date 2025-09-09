@@ -3,7 +3,6 @@ import { type CaughtPokemon, type PokemonMoves } from '../../lib/types'
 import { Button } from '../ui/Button'
 import { AddPokemonModal } from '../pokemon/AddPokemonModal'
 import type { PokemonListItem } from '../../api/pokemon/types'
-import { useTheme } from '../../contexts/ThemeContext'
 
 interface FooterProps {
   addPokemon: (pokemon: CaughtPokemon, moveIds: PokemonMoves['id'][]) => Promise<void>
@@ -12,7 +11,6 @@ interface FooterProps {
 
 export function Footer({ addPokemon, availablePokemon }: FooterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { isDarkMode } = useTheme()
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -20,11 +18,7 @@ export function Footer({ addPokemon, availablePokemon }: FooterProps) {
 
   return (
     <>
-      <footer className={`sticky bottom-0 p-4 shadow-lg z-50 transition-colors duration-300 ${
-        isDarkMode
-          ? 'bg-gray-800 border-gray-700'
-          : 'bg-white border-gray-200'
-      } border-t`}>
+      <footer className="sticky bottom-0 p-4 shadow-lg z-50 transition-colors duration-300 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 border-t">
         <div className="mx-auto flex justify-end">
           <Button
             onClick={handleOpenModal}

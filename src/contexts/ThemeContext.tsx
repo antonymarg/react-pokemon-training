@@ -35,10 +35,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // Update document class and localStorage when theme changes
     if (isDarkMode) {
       document.documentElement.classList.add('dark')
-      document.body.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
-      document.body.classList.remove('dark')
     }
     localStorage.setItem('pokemon-dark-mode', isDarkMode.toString())
   }, [isDarkMode])
