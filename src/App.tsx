@@ -6,11 +6,12 @@ import { PokemonCard } from './components/pokemon/PokemonCard'
 import pokeball from './assets/svgs/pokeball.svg'
 import { usePokemon } from './hooks/usePokemon'
 import { Spinner } from './components/ui/Spinner'
-import { ThemeProvider, useTheme } from './contexts/ThemeContext'
+import { ThemeContext, ThemeProvider } from './contexts/ThemeContext'
+import { useContext } from 'react'
 
 function App() {
   const { availablePokemon, caughtPokemon, addPokemon, removePokemon, levelUpPokemon, isLoading } = usePokemon()
-  const { isDarkMode } = useTheme()
+  const { isDarkMode } = useContext(ThemeContext)
 
   if (isLoading) {
     return (

@@ -1,7 +1,9 @@
-import { useTheme } from '../../contexts/ThemeContext'
+import { useContext } from 'react'
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 export function NoPokemonMessage() {
-  const { isDarkMode } = useTheme()
+  const { isDarkMode } = useContext(ThemeContext)
+
   return (
     <div className="flex flex-1 items-center justify-center h-full w-full">
       <div className="text-center">

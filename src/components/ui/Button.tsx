@@ -1,5 +1,5 @@
-import { type ButtonHTMLAttributes, type ReactNode } from 'react'
-import { useTheme } from '../../contexts/ThemeContext'
+import { useContext, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
 type ButtonSize = 'sm' | 'md' | 'lg'
@@ -52,7 +52,7 @@ export function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const { isDarkMode } = useTheme()
+  const { isDarkMode } = useContext(ThemeContext)
   const baseStyles = `inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:hover:transform-none ${
     isDarkMode
       ? 'focus:ring-blue-400 focus:ring-offset-gray-800'

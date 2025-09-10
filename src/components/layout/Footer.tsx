@@ -3,7 +3,8 @@ import { type CaughtPokemon, type PokemonMoves } from '../../lib/types'
 import { Button } from '../ui/Button'
 import { AddPokemonModal } from '../pokemon/AddPokemonModal'
 import type { PokemonListItem } from '../../api/pokemon/types'
-import { useTheme } from '../../contexts/ThemeContext'
+import { ThemeContext } from '../../contexts/ThemeContext'
+import { useContext } from 'react'
 
 interface FooterProps {
   addPokemon: (pokemon: CaughtPokemon, moveIds: PokemonMoves['id'][]) => Promise<void>
@@ -12,7 +13,7 @@ interface FooterProps {
 
 export function Footer({ addPokemon, availablePokemon }: FooterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { isDarkMode } = useTheme()
+  const { isDarkMode } = useContext(ThemeContext)
 
   const handleOpenModal = () => {
     setIsModalOpen(true)

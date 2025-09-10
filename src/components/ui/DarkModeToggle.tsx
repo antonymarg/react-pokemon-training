@@ -1,4 +1,5 @@
-import { useTheme } from '../../contexts/ThemeContext'
+import { useContext } from 'react'
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 const SunIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 20 20" fill="currentColor">
@@ -13,7 +14,8 @@ const MoonIcon = ({ className }: { className?: string }) => (
 )
 
 export function DarkModeToggle() {
-  const {isDarkMode, toggleDarkMode}= useTheme()
+  const {isDarkMode, toggleDarkMode}= useContext(ThemeContext)
+
   return (
     <button
       onClick={toggleDarkMode}
